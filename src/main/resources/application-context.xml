@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--<bean id="employeeDao" class="ua.goit.java.model.jdbc.JdbcEmployeeDAO">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>-->
+
+   <bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource">
+        <property name="driverClass" value="${jdbc.driver.class}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="minPoolSize" value="${jdbc.min.connections}"/>
+        <property name="maxPoolSize" value="${jdbc.max.connections}"/>
+        <property name="acquireIncrement" value="${jdbc.acquire.increment}"/>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:jdbc.properties"/>
+    </bean>
+
+    <bean id="employeeDao" class="ua.goit.java.dao.hibernate.HEmployeeDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="tableName" value="Employee"/>
+    </bean>
+
+    <bean class="ua.goit.java.controllers.EmployeeController" id="employeeController">
+        <property name="employeeDao" ref="employeeDao"/>
+    </bean>
+
+    <bean id="orderDao" class="ua.goit.java.dao.hibernate.HOrderDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="employeeDAO" ref="employeeDao"/>
+        <property name="tableName" value="Orders"/>
+    </bean>
+
+    <bean class="ua.goit.java.controllers.OrderController" id="orderController">
+        <property name="employeeDao" ref="employeeDao"/>
+        <property name="dishDao" ref="dishDao"/>
+        <property name="orderDao" ref="orderDao"/>
+
+    </bean>
+
+    <bean id="main" class="ua.goit.java.Main" init-method="init">
+        <property name="reInt" value="false"/>
+        <property name="employeeController" ref="employeeController"/>
+        <property name="dishController" ref="dishController"/>
+        <property name="orderController" ref="orderController"/>
+    </bean>
+
+
+    <bean id="dishController" class="ua.goit.java.controllers.DishController">
+        <property name="dishDao" ref="dishDao"/>
+    </bean>
+
+    <bean id="dishDao" class="ua.goit.java.dao.hibernate.HDishDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="tableName" value="Dish"/>
+    </bean>
+
+</beans>
