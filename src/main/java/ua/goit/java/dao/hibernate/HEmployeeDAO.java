@@ -5,6 +5,7 @@ import org.hibernate.query.Query;
 import org.springframework.transaction.annotation.Transactional;
 import ua.goit.java.dao.EmployeeDAO;
 import ua.goit.java.model.Employee;
+import ua.goit.java.model.Waiter;
 
 public class HEmployeeDAO extends HAbstractDao<Employee> implements EmployeeDAO{
 
@@ -22,7 +23,7 @@ public class HEmployeeDAO extends HAbstractDao<Employee> implements EmployeeDAO{
         Query query = session.createQuery("select e from Employee e where e.name like :name");
         query.setParameter("name", name);
 
-        return (Employee) query.list().get(0);
+        return (Waiter) query.list().get(0);
     }
 
 }

@@ -6,6 +6,7 @@ import ua.goit.java.dao.EmployeeDAO;
 import ua.goit.java.dao.OrderDao;
 import ua.goit.java.model.Dish;
 import ua.goit.java.model.Orders;
+import ua.goit.java.model.Waiter;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,9 +20,9 @@ public class OrderController {
     private OrderDao orderDao;
 
     @Transactional
-    public void createOrder(String waiterName, List<String> dishes, int tableNumber){
+    public void createOrder(Waiter waiter, List<String> dishes, int tableNumber){
         Orders order = new Orders();
-        order.setWaiter(employeeDao.findByName(waiterName));
+        order.setWaiter(waiter);
         order.setDishes(createDishes(dishes));
         order.setTableNumber(tableNumber);
         order.setOrderDate(new Date());
@@ -80,13 +81,17 @@ public class OrderController {
         dishes1.add("Salad");
         dishes1.add("Potato");
 
-        createOrder("Bob", dishes1, 1);
-        createOrder("John", dishes2, 2);
-        createOrder("Bob", dishes3, 1);
+        Waiter bob = (Waiter) employeeDao.findByName("Bob");
+        Waiter john = (Waiter) employeeDao.findByName("John");
+        Waiter mary = (Waiter) employeeDao.findByName("Mary");
+
+        createOrder(bob, dishes1, 1);
+        createOrder(john, dishes2, 2);
+        createOrder(mary, dishes3, 1);
     }
 
-    public List<Orders> getByNameWaiter(String waiterName) {
-        return orderDao.findByWaiterName(waiterName);
+    public List<Orders> getByNameWaiter(Waiter waiter) {
+        return orderDao.findByWaiterName(waiter);
     }
 
     public void removeOrder(Orders order) {

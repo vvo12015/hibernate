@@ -32,7 +32,6 @@
 
     <bean id="orderDao" class="ua.goit.java.dao.hibernate.HOrderDao">
         <property name="sessionFactory" ref="sessionFactory"/>
-        <property name="employeeDAO" ref="employeeDao"/>
         <property name="tableName" value="Orders"/>
     </bean>
 
@@ -43,8 +42,7 @@
 
     </bean>
 
-    <bean id="main" class="ua.goit.java.Main" init-method="init">
-        <property name="reInt" value="false"/>
+    <bean id="main" class="ua.goit.java.Main">
         <property name="employeeController" ref="employeeController"/>
         <property name="dishController" ref="dishController"/>
         <property name="orderController" ref="orderController"/>

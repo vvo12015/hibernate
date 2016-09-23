@@ -8,23 +8,6 @@ public class Main {
     private EmployeeController employeeController;
     private DishController dishController;
     private OrderController orderController;
-    private boolean reInt;
-
-    public void setReInt(boolean reInt) {
-        this.reInt = reInt;
-    }
-
-    public void init(){
-        if (reInt){
-            orderController.removeAllOrders();
-            dishController.removeAllDishes();
-            employeeController.removeAllEmployees();
-
-            employeeController.initEmployees();
-            dishController.initDishes();
-            orderController.initOrders();
-        }
-    }
 
     public void setOrderController(OrderController orderController) {
         this.orderController = orderController;
