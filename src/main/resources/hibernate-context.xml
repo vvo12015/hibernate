@@ -16,7 +16,7 @@
         <property name="maxPoolSize" value="${jdbc.max.connections}"/>
         <property name="acquireIncrement" value="${jdbc.acquire.increment}"/>
     </bean>
-000
+
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location" value="classpath:jdbc.properties"/>
     </bean>
