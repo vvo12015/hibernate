@@ -31,25 +31,6 @@ public class Waiter extends Employee{
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Waiter)) return false;
-        if (!super.equals(o)) return false;
-
-        Waiter waiter = (Waiter) o;
-
-        return orders != null ? orders.equals(waiter.orders) : waiter.orders == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (orders != null ? orders.hashCode() : 0);
-        return result;
-    }
-
-    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 

@@ -20,7 +20,9 @@ public class HOrderDao extends HAbstractDao<Orders> implements OrderDao{
     @Override
     @Transactional
     public Orders load(Long id) {
-        return sessionFactory.getCurrentSession().load(Orders.class, id);
+        Orders orders = new Orders();
+        sessionFactory.getCurrentSession().load(orders, id);
+        return orders;
     }
 
     @Override
@@ -29,9 +31,9 @@ public class HOrderDao extends HAbstractDao<Orders> implements OrderDao{
 
         Session session = sessionFactory.getCurrentSession();
 
-        Query query = session.createQuery("select o from Orders o where o.waiter= :waiter");
+        Query<Orders> query = session.createQuery("select o from Orders o where o.waiter= :waiter");
         query.setParameter("waiter", waiter);
 
-        return (List<Orders>) query.list();
+        return query.list();
     }
 }

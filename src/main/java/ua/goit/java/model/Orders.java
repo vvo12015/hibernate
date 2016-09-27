@@ -16,7 +16,7 @@ public class Orders {
     @GenericGenerator(name = "increment", strategy = "increment")
     private long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_id")
     private Employee waiter;
 
@@ -34,6 +34,16 @@ public class Orders {
 
     @Column(name = "order_date")
     private Date orderDate;
+
+    public Orders(Waiter waiter, List<Dish> dishes, int tableNumber) {
+        this.waiter = waiter;
+        this.dishes = dishes;
+        this.tableNumber = tableNumber;
+        this.orderDate = new Date();
+    }
+
+    public Orders() {
+    }
 
     public Long getId() {
         return id;
@@ -75,6 +85,28 @@ public class Orders {
         this.orderDate = orderDate;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Orders)) return false;
+
+        Orders orders = (Orders) o;
+
+        if (tableNumber != orders.tableNumber) return false;
+        if (waiter != null ? !waiter.equals(orders.waiter) : orders.waiter != null) return false;
+        if (dishes != null ? !dishes.equals(orders.dishes) : orders.dishes != null) return false;
+        return orderDate != null ? orderDate.equals(orders.orderDate) : orders.orderDate == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = waiter != null ? waiter.hashCode() : 0;
+        result = 31 * result + (dishes != null ? dishes.hashCode() : 0);
+        result = 31 * result + tableNumber;
+        result = 31 * result + (orderDate != null ? orderDate.hashCode() : 0);
+        return result;
+    }
 
     @Override
     public String toString() {

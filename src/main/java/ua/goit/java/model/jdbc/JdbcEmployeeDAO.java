@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.goit.java.model.Employee;
 import ua.goit.java.dao.EmployeeDAO;
+import ua.goit.java.model.Waiter;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -71,7 +72,17 @@ public class JdbcEmployeeDAO implements EmployeeDAO {
     }
 
     @Override
+    public Waiter loadWaiter(Long id) {
+        return null;
+    }
+
+    @Override
     public Employee findByName(String name) {
+        return null;
+    }
+
+    @Override
+    public Waiter findWaiterByName(String name) {
         return null;
     }
 

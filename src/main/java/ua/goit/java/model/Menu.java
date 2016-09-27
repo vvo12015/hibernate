@@ -9,6 +9,8 @@ import java.util.List;
 @Entity
 @Table(name="menu")
 public class Menu {
+    public Menu() {
+    }
 
     @Id
     @Column(name = "id")
@@ -19,7 +21,7 @@ public class Menu {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     @JoinTable(
             name = "dish_to_menu",
             joinColumns = @JoinColumn(name = "menu_id"),
@@ -30,6 +32,33 @@ public class Menu {
 
     @Column(name = "photo")
     private String photo;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Menu)) return false;
+
+        Menu menu = (Menu) o;
+
+        if (name != null ? !name.equals(menu.name) : menu.name != null) return false;
+        if (dishes != null ? !dishes.equals(menu.dishes) : menu.dishes != null) return false;
+        return photo != null ? photo.equals(menu.photo) : menu.photo == null;
+
+    }
+
+    public Menu(String name, List<Dish> dishes, String photo) {
+        this.name = name;
+        this.dishes = dishes;
+        this.photo = photo;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (dishes != null ? dishes.hashCode() : 0);
+        result = 31 * result + (photo != null ? photo.hashCode() : 0);
+        return result;
+    }
 
     public String getName() {
         return name;

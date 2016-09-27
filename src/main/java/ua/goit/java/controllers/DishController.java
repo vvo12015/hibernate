@@ -8,56 +8,42 @@ import ua.goit.java.model.DishCategory;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-public class DishController {
-
-    private DishDao dishDao;
+public class DishController extends AbstractController<Dish, DishDao> {
 
     @Transactional
-    public void initDishes(){
-        Set<Dish> dishes = new HashSet<>(dishDao.findAll());
+    public void init(){
+        Set<Dish> dishes = new HashSet<>(dao.findAll());
 
         Dish plov = new Dish(DishCategory.MAIN, "Plov", 300F, 5.00F, "dishPhoto");
         Dish salad = new Dish(DishCategory.MAIN, "Salad", 200F, 2.00F, "dishPhoto");
         Dish potato = new Dish(DishCategory.MAIN, "Potato", 100F, 3.00F, "dishPhoto");
 
         if (!dishes.contains(plov)){
-            dishDao.save(plov);
+            dao.save(plov);
         }
         if (!dishes.contains(salad)){
-            dishDao.save(salad);
+            dao.save(salad);
         }
         if (!dishes.contains(potato)){
-            dishDao.save(potato);
+            dao.save(potato);
         }
-    }
-
-    @Transactional
-    public void save(Dish dish){
-        dishDao.save(dish);
-    }
-
-    @Transactional
-    public List<Dish> getAllDishes(){
-        return dishDao.findAll();
     }
 
     @Transactional
     public Dish getDishByName(String name){
-        return dishDao.findByName(name);
-    }
-
-    public void setDishDao(DishDao dishDao) {
-        this.dishDao = dishDao;
+        return dao.findByName(name);
     }
 
     @Transactional
-    public void removeAllDishes() {
-        dishDao.removeAll();
+    public List<Dish> createDishes(List<String> dishes) {
+
+        List<Dish> result = dishes.stream()
+                .map(dishName -> dao.findByName(dishName))
+                .collect(Collectors.toList());
+
+        return result;
     }
 
-    @Transactional
-    public void removeDish(Dish dish) {
-        dishDao.remove(dish);
-    }
 }
