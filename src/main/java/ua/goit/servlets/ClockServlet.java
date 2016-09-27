@@ -18,6 +18,8 @@ public class ClockServlet extends HttpServlet {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        out.println("Hello World!!!!");
         out.println("Current time is " + new Date());
     }
 }

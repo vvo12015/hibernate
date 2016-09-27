@@ -14,8 +14,18 @@
         <servlet-class>ua.goit.servlets.ClockServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>Hello</servlet-name>
+        <servlet-class>ua.goit.servlets.HelloServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>Clock</servlet-name>
         <url-pattern>/clock</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Hello</servlet-name>
+        <url-pattern>/hello</url-pattern>
     </servlet-mapping>
 </web-app>
