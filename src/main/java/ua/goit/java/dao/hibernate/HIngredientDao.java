@@ -21,11 +21,11 @@ public class HIngredientDao extends HAbstractDao<Ingredient> implements Ingredie
 
     @Override
     @Transactional
-    public Ingredient findByName(String ingredientName) {
+    public Ingredient findByName(String name) {
         Session session = sessionFactory.getCurrentSession();
 
         Query query = session.createQuery("select i from Ingredient i where i.name like :name");
-        query.setParameter("name", ingredientName);
+        query.setParameter("name", name);
 
         return (Ingredient) query.list().get(0);
     }

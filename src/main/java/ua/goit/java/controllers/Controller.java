@@ -4,12 +4,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * Created by vvo12 on 24.09.2016.
- */
 public interface Controller<T> {
     @Transactional
-    void save(T o);
+    void save(T e);
 
     @Transactional
     List<T> getAll();

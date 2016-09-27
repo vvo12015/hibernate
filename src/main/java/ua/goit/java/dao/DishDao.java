@@ -4,5 +4,5 @@ import ua.goit.java.model.Dish;
 
 public interface DishDao extends BaseDao<Dish>{
 
-    Dish findByName(String name);
+    Dish findByName(String DishName);
 }

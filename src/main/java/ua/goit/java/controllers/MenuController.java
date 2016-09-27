@@ -18,6 +18,6 @@ public class MenuController extends AbstractController<Menu, MenuDao> {
     }
 
     public void init() {
-        dao.save(new Menu("init", dishController.getAll(), "photo"));
+        dao.save(new Menu("init", dishController.getAll(), "pHoto"));
     }
 }

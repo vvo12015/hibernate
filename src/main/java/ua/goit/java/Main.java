@@ -15,7 +15,7 @@ public class Main {
 
     public void start() {
         orderController.printAllOrder();
-        System.out.println();
+        System.out.println("-----");
         employeeController.getAll().forEach(System.out::println);
     }
 

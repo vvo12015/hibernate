@@ -131,7 +131,7 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{" +
-                "id=" + id +
+                "id = " + id +
                 ", name='" + name + '\'' +
                 ", surName='" + surName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +

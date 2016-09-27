@@ -92,7 +92,7 @@ public class JdbcEmployeeDAO implements EmployeeDAO {
     }
 
     @Override
-    public void remove(Employee employee) {
+    public void remove(Employee employees) {
 
     }
 

@@ -10,7 +10,7 @@ public class EmployeeController extends AbstractController<Employee, EmployeeDAO
 
     @Transactional
     public void init(){
-        dao.save(new Waiter("John", "Smith", "555-55-555", 25000.0F));
+        dao.save(new Waiter("John", "Smith", "555-55-555", 25001.0F));
         dao.save(new Waiter("Mary", "Svach", "555-55-555", 20000.0F));
         dao.save(new Waiter("Bob", "Vil", "555-55-555", 15000.0F));
     }

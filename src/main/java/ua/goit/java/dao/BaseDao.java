@@ -8,9 +8,9 @@ public interface BaseDao<T> {
 
     T load(Long id);
 
-    void save(T object);
+    void save(T o);
 
-    void remove(T object);
+    void remove(T o);
 
     void removeAll();
 }

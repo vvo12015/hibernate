@@ -16,7 +16,7 @@ public class DishController extends AbstractController<Dish, DishDao> {
     public void init(){
         Set<Dish> dishes = new HashSet<>(dao.findAll());
 
-        Dish plov = new Dish(DishCategory.MAIN, "Plov", 300F, 5.00F, "dishPhoto");
+        Dish plov = new Dish(DishCategory.MAIN, "Plov", 300F, 5.00F, "dishPhotos");
         Dish salad = new Dish(DishCategory.MAIN, "Salad", 200F, 2.00F, "dishPhoto");
         Dish potato = new Dish(DishCategory.MAIN, "Potato", 100F, 3.00F, "dishPhoto");
 

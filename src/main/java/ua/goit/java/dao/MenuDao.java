@@ -5,5 +5,5 @@ import ua.goit.java.model.Menu;
 public interface MenuDao extends BaseDao<Menu>{
 
 
-    Menu findByName(String name);
+    Menu findByName(String menuName);
 }

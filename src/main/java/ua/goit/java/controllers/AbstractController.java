@@ -5,13 +5,13 @@ import ua.goit.java.dao.BaseDao;
 
 import java.util.List;
 
-public class AbstractController<T, D extends BaseDao<T>> implements Controller<T> {
+class AbstractController<T, D extends BaseDao<T>> implements Controller<T> {
     protected D dao;
 
     @Override
     @Transactional
-    public void save(T o){
-        dao.save(o);
+    public void save(T e){
+        dao.save(e);
     }
 
     @Override

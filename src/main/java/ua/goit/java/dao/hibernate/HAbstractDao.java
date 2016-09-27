@@ -7,7 +7,7 @@ import ua.goit.java.dao.BaseDao;
 
 import java.util.List;
 
-public abstract class HAbstractDao<T> implements BaseDao<T>{
+abstract class HAbstractDao<T> implements BaseDao<T>{
 
     protected SessionFactory sessionFactory;
     protected  String tableName;
@@ -20,7 +20,7 @@ public abstract class HAbstractDao<T> implements BaseDao<T>{
     @Transactional
     public List<T> findAll() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("select e from " + tableName + " e").list();
+        return session.createQuery("select o from " + tableName + " o").list();
     }
 
     @Override

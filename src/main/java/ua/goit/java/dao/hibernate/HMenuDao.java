@@ -17,11 +17,11 @@ public class HMenuDao extends HAbstractDao<Menu> implements MenuDao{
     }
 
     @Override
-    public Menu findByName(String name) {
+    public Menu findByName(String menuName) {
         Session session = sessionFactory.getCurrentSession();
 
         Query query = session.createQuery("select m from Menu m where m.name like :name");
-        query.setParameter("name", name);
+        query.setParameter("name", menuName);
 
         return (Menu) query.list().get(0);
     }

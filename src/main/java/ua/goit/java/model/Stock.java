@@ -70,4 +70,13 @@ public class Stock {
         result = 31 * result + (int) (count ^ (count >>> 32));
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Stock{" +
+                "id=" + id +
+                ", ingredient=" + ingredient +
+                ", count=" + count +
+                '}';
+    }
 }

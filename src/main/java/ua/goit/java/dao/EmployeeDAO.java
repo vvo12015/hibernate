@@ -7,7 +7,7 @@ public interface EmployeeDAO extends BaseDao<Employee>{
 
     Waiter loadWaiter(Long id);
 
-    Employee findByName(String name);
+    Employee findByName(String employeeName);
 
     Waiter findWaiterByName(String name);
 }

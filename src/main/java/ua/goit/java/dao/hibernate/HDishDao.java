@@ -18,11 +18,11 @@ public class HDishDao extends HAbstractDao<Dish> implements DishDao{
 
     @Override
     @Transactional
-    public Dish findByName(String name) {
+    public Dish findByName(String dishName) {
 
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("select d from Dish d where d.name like :name");
-        query.setParameter("name", name);
+        query.setParameter("name", dishName);
         return (Dish) query.list().get(0);
     }
 }

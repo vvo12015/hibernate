@@ -116,7 +116,7 @@ public class Dish {
     @Override
     public String toString() {
         return "Dish{" +
-                "id=" + id +
+                "id = " + id +
                 ", category=" + category +
                 ", name='" + name + '\'' +
                 ", weight=" + weight +

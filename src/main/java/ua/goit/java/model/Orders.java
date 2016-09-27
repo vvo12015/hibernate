@@ -111,7 +111,7 @@ public class Orders {
     @Override
     public String toString() {
         return "Orders{" +
-                "id=" + id +
+                "id = " + id +
                 ", dishes=" + dishes +
                 ", tableNumber=" + tableNumber +
                 ", orderDate=" + orderDate +

@@ -13,11 +13,11 @@ public class HStockDao extends HAbstractDao<Stock> implements StockDao {
 
     @Override
     @Transactional
-    public Stock load(Long id) {
+    public Stock load(Long ingredientId) {
 
         Stock stock = new Stock();
 
-        sessionFactory.getCurrentSession().load(stock, id);
+        sessionFactory.getCurrentSession().load(stock, ingredientId);
 
         return stock;
     }

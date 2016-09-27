@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface OrderDao extends BaseDao<Orders> {
 
-    List<Orders> findByWaiterName(Waiter waiter);
+    List<Orders> findByWaiterName(Waiter waiterForFind);
 }

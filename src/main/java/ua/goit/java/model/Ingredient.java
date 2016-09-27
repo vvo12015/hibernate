@@ -42,6 +42,15 @@ public class Ingredient {
     }
 
     @Override
+    public String toString() {
+        return "Ingredient{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", measure='" + measure + '\'' +
+                '}';
+    }
+
+    @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (measure != null ? measure.hashCode() : 0);

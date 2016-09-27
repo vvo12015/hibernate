@@ -5,5 +5,5 @@ import ua.goit.java.model.Ingredient;
 
 public interface IngredientDao {
 
-    Ingredient findByName(String ingredientName);
+    Ingredient findByName(String name);
 }

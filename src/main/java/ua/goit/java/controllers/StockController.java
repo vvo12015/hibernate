@@ -25,6 +25,6 @@ public class StockController extends AbstractController<Stock, HStockDao>{
 
         Long ingredientId = 1L;
 
-        dao.save(new Stock(ingredientController.getById(ingredientId), 10));
+        dao.save(new Stock(ingredientController.getById(ingredientId), 9));
     }
 }

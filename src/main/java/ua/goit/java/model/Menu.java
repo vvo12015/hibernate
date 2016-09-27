@@ -21,6 +21,16 @@ public class Menu {
     @Column(name = "name")
     private String name;
 
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", dishes=" + dishes +
+                ", photo='" + photo + '\'' +
+                '}';
+    }
+
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     @JoinTable(
             name = "dish_to_menu",

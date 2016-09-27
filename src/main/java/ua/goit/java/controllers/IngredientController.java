@@ -13,7 +13,7 @@ public class IngredientController extends AbstractController<Ingredient, HIngred
     public void init() {
         dao.save(new Ingredient("Potato", "kg"));
         dao.save(new Ingredient("Cabbage", "kg"));
-        dao.save(new Ingredient("Butter", "kg"));
+        dao.save(new Ingredient("Butter", "g"));
         dao.save(new Ingredient("Oil", "l"));
     }
 }

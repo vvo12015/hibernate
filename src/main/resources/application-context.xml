@@ -43,7 +43,6 @@
         <property name="employeeController" ref="employeeController"/>
         <property name="dishController" ref="dishController"/>
         <property name="dao" ref="orderDao"/>
-
     </bean>
 
     <bean id="main" class="ua.goit.java.Main">

@@ -19,9 +19,9 @@ public class HOrderDao extends HAbstractDao<Orders> implements OrderDao{
 
     @Override
     @Transactional
-    public Orders load(Long id) {
+    public Orders load(Long orderId) {
         Orders orders = new Orders();
-        sessionFactory.getCurrentSession().load(orders, id);
+        sessionFactory.getCurrentSession().load(orders, orderId);
         return orders;
     }
 

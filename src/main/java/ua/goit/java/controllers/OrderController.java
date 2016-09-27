@@ -49,7 +49,7 @@ public class OrderController extends AbstractController<Orders, OrderDao>{
 
         dao.save(new Orders(bob, dishController.createDishes(dishes1), 1));
         dao.save(new Orders(john, dishController.createDishes(dishes2), 2));
-        dao.save(new Orders(mary, dishController.createDishes(dishes3), 1));
+        dao.save(new Orders(mary, dishController.createDishes(dishes3), 3));
     }
 
     public List<Orders> getByNameWaiter(Waiter waiter) {

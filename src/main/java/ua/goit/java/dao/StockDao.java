@@ -9,5 +9,5 @@ import java.util.List;
 public interface StockDao extends BaseDao<Stock>{
 
     @Transactional
-    List<Stock> findStockByNameIngredient(Ingredient ingredient);
+    List<Stock> findStockByNameIngredient(Ingredient ingredientForFind);
 }

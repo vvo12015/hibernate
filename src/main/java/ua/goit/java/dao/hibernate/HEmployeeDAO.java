@@ -39,12 +39,12 @@ public class HEmployeeDAO extends HAbstractDao<Employee> implements EmployeeDAO{
 
     @Override
     @Transactional
-    public Waiter findWaiterByName(String name) {
+    public Waiter findWaiterByName(String waiterName) {
 
         Session session = sessionFactory.getCurrentSession();
 
         Query query = session.createQuery("select w from Employee w where w.name like :name");
-        query.setParameter("name", name);
+        query.setParameter("name", waiterName);
 
         return (Waiter) query.list().get(0);
     }
