@@ -1,13 +1,9 @@
-import org.hibernate.SessionFactory;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ua.goit.java.Main;
-import ua.goit.java.controllers.DishController;
-import ua.goit.java.controllers.EmployeeController;
-import ua.goit.java.controllers.OrderController;
+import ua.goit.java.Position;
+import ua.goit.java.controllers.*;
 import ua.goit.java.model.*;
 
 import java.util.ArrayList;
@@ -15,122 +11,217 @@ import java.util.List;
 
 public class HibernateTest {
 
-    private static final String DISH_NAME = "testDish2";
-    private static final String DISH_PHOTO = "dishPhoto2";
-    private static final int TABLE_NUMBER = 888;
-
-    private static final String WAITER_NAME = "testWaiter2";
-    private static final String WAITER_PHONE = "222-222-222";
-    private static final String SUR_NAME = "test2";
-    private static final Float WAITER_SALARY = 2000F;
+    private static final String WAITER_FOR_ORDER = "waiterForCreate";
+    private static final String WAITER_NAME = "waiterTest";
+    private static final String PHONE_NUMBER = "777-77-777";
+    private static final float SALARY = 7700.0F;
+    private static final int TABLE_NUMBER = 777;
+    private static final String DISH_NAME = "dishForRemove";
+    private static final String PHOTO_FOR_TEST = "photoForTest";
+    private static final float WEIGHT = 300F;
+    private static final float PRICE = 15F;
+    private static final String EMPLOYEE_NAME = "testEmployee";
+    private static final float EMPLOYEE_SALARY = 1111F;
+    private static final String MENU_NAME = "testMenu";
+    private static final String INGREDIENT_NAME = "testIngredient";
+    private static final int COUNT_INGREDIENT = 10;
+    public static final String DISH_FOR_ORDER = "dishForOrder";
 
     private ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application-context.xml",
             "hibernate-context.xml");
     private DishController dishController = (DishController) applicationContext.getBean("dishController");
     private EmployeeController employeeController = (EmployeeController) applicationContext.getBean("employeeController");
     private OrderController orderController = (OrderController) applicationContext.getBean("orderController");
-    private SessionFactory sessionFactory = (SessionFactory) applicationContext.getBean("sessionFactory");
-    private List<String> dishesName;
-    private Orders order;
-    private boolean reInt = true;
+    private MenuController menuController = (MenuController) applicationContext.getBean("menuController");
+    private IngredientController ingredientController = (IngredientController)
+                                                applicationContext.getBean("ingredientController");
+    private StockController stockController = (StockController)
+            applicationContext.getBean("stockController");
 
-    @Before
-    public void setUp(){
-        if (reInt){
-            orderController.removeAllOrders();
-            dishController.removeAllDishes();
-            employeeController.removeAllEmployees();
+    @Test
+    public void testOrderLoad(){
 
-            employeeController.initEmployees();
-            dishController.initDishes();
-            orderController.initOrders();
-            order = mySetUp();
-        }
+        Dish dish = new Dish(DishCategory.MAIN, DISH_FOR_ORDER, WEIGHT, PRICE, PHOTO_FOR_TEST);
+        dishController.save(dish);
+
+        List<Dish> dishes = new ArrayList<>();
+        dishes.add(dish);
+
+        Waiter waiter = new Waiter(WAITER_NAME, WAITER_NAME, PHONE_NUMBER, SALARY);
+        employeeController.save(waiter);
+
+        Orders order = new Orders(waiter, dishes, TABLE_NUMBER);
+
+        orderController.save(order);
+
+        Long orderId = orderController.getByNameWaiter(waiter).get(0).getId();
+
+        Orders orderTest = orderController.getById(orderId);
+
+        System.out.println(orderTest);
+
+        Assert.assertEquals("load dish by id", orderTest.getWaiter(), waiter);
+
+        dishController.delete(dish);
+        employeeController.delete(waiter);
+        orderController.delete(order);
+
+    }
+
+
+    @Test
+    public void testDishRemove(){
+
+        Dish dish = new Dish(DishCategory.MAIN, DISH_NAME, 300F, 15F, PHOTO_FOR_TEST);
+
+        dishController.save(dish);
+
+        dishController.delete(dish);
     }
 
     @Test
-    public void mainTest(){
-        Main main = applicationContext.getBean(Main.class);
-        main.start();
+    public void testDishLoad(){
+
+        String dishName = DISH_NAME;
+
+        Dish dish = new Dish(DishCategory.MAIN, dishName, WEIGHT, PRICE, PHOTO_FOR_TEST);
+
+        dishController.save(dish);
+
+        Long dishId = dishController.getDishByName(dishName).getId();
+
+        Dish dishTest = dishController.getById(dishId);
+
+        System.out.println(dishTest);
+
+        Assert.assertEquals("load dish by id", dishTest.getName(), dishName);
+
+        dishController.delete(dishTest);
+    }
+
+     @Test
+    public void testWaiterLoad(){
+
+         String waiterNameExcepted = WAITER_NAME;
+
+         employeeController.save(new Waiter(waiterNameExcepted, waiterNameExcepted,
+                 PHONE_NUMBER, SALARY));
+
+         Long employeeId = employeeController.getEmployeeByName(waiterNameExcepted).getId();
+
+         Waiter employee = employeeController.getWaiterById(employeeId);
+
+         System.out.println(employee);
+
+         Assert.assertEquals("load employee by id", employee.getName(), waiterNameExcepted);
+
+         employeeController.delete(employee);
+    }
+
+
+
+    @Test
+    public void testEmployeeLoad(){
+
+        String employeeNameExcepted = EMPLOYEE_NAME;
+
+        employeeController.save(new Employee(employeeNameExcepted, employeeNameExcepted,
+                PHONE_NUMBER, Position.COOK, EMPLOYEE_SALARY));
+
+        Long employeeId = employeeController.getEmployeeByName(employeeNameExcepted).getId();
+
+        Employee employee = employeeController.getById(employeeId);
+
+        System.out.println(employee);
+
+        Assert.assertEquals("load employee by id", employee.getName(), employeeNameExcepted);
+
+        employeeController.delete(employee);
     }
 
     @Test
-    public void employeeFindByName(){
-        Employee employee = employeeController.getEmployeeByName(WAITER_NAME);
+    public void testMenuLoad(){
 
-        Assert.assertEquals("equals name from db", employee.getSurName(), SUR_NAME);
+        String menuNameExcepted = MENU_NAME;
+
+        Menu menu = new Menu(MENU_NAME, dishController.getAll(), PHOTO_FOR_TEST);
+
+        menuController.save(menu);
+
+        Long menuId = menuController.getMenuByName(menuNameExcepted).getId();
+
+        menu = menuController.getById(menuId);
+
+        System.out.println(menu);
+
+        Assert.assertEquals("load menu by id", menu.getName(), menuNameExcepted);
+
+        menuController.delete(menu);
     }
 
     @Test
-    public void dishFindByName(){
+    public void testIngredientLoad(){
+        String ingredientNameExcepted = INGREDIENT_NAME;
 
-        Dish dish = dishController.getDishByName(DISH_NAME);
+        Ingredient ingredient = new Ingredient(ingredientNameExcepted, ingredientNameExcepted);
 
-        Assert.assertEquals("equals photo from db", dish.getPhoto(), DISH_PHOTO);
+        ingredientController.save(ingredient);
+
+        Long ingredientId = ingredientController.getIngredientByName(ingredientNameExcepted).getId();
+
+        ingredient = ingredientController.getById(ingredientId);
+
+        System.out.println(ingredient);
+
+        Assert.assertEquals("load ingredient by id", ingredient.getName(), ingredientNameExcepted);
+
+        ingredientController.delete(ingredient);
+
     }
 
     @Test
-    public void orderControllerTest(){
+    public void testStockLoad(){
 
-        Assert.assertEquals("check to be order of test", order.getTableNumber(), TABLE_NUMBER);
+        String stockNameExcepted = INGREDIENT_NAME;
 
-        mySetDown();
+        Stock stock = new Stock(ingredientController.getIngredientByName(stockNameExcepted), COUNT_INGREDIENT);
+
+        stockController.save(stock);
+
+        Long stockId = stockController
+                .getStockByNameIngredient(ingredientController.getIngredientByName(stockNameExcepted))
+                .get(0)
+                .getId();
+
+        Ingredient ingredient = stockController.getById(stockId).getIngredient();
+
+        System.out.println(stock);
+
+        Assert.assertEquals("load stock by id", ingredient.getName(), stockNameExcepted);
+
+        stockController.delete(stock);
+
     }
 
-    @Test(expected = Exception.class)
-    public void exceptionOrderControllerTest(){
 
-        Assert.assertEquals("check to be order of test", order.getTableNumber(), TABLE_NUMBER);
 
-        mySetDown();
-
-        order = orderController.getByNameWaiter((Waiter) employeeController.getEmployeeByName(WAITER_NAME)).get(0);
-    }
-
-    private void mySetDown() {
-        orderController.removeAllOrders();
-        dishController.removeAllDishes();
-        employeeController.removeAllEmployees();
-    }
-
-    private Orders mySetUp() {
-        employeeController.createEmployee(new Waiter(WAITER_NAME, SUR_NAME, WAITER_PHONE, WAITER_SALARY));
-        dishController.save(new Dish(DishCategory.MAIN, DISH_NAME, 2F, 2F, DISH_PHOTO));
-
-        dishesName = new ArrayList<>();
-        dishesName.add(DISH_NAME);
-
-        orderController.createOrder((Waiter) employeeController.getEmployeeByName(WAITER_NAME),
-                                    dishesName, TABLE_NUMBER);
-
-        order = new Orders();
-        List<Orders> orders = orderController.getByNameWaiter((Waiter) employeeController.getEmployeeByName(WAITER_NAME));
-        order = orders.get(0);
-        return order;
+    @Test
+    public void init(){
+        dishController.init();
+        employeeController.init();
+        orderController.init();
+        menuController.init();
+        ingredientController.init();
+        stockController.init();
     }
 
     @Test
-    public void testRemoveOrder(){
-
-        String waiterName = "waiterForCreate";
-
-        Waiter waiter = new Waiter(waiterName, waiterName, "777-77-777", 7700.0F);
-
-        employeeController.createEmployee(waiter);
-
-        dishesName = new ArrayList<>();
-        dishesName.add(DISH_NAME);
-
-        int tableNumber = 777;
-
-        orderController.createOrder(waiter, dishesName, tableNumber);
-
-        waiter = (Waiter) employeeController.getEmployeeByName(waiterName);
-
-        Orders order = orderController.getByNameWaiter(waiter).get(0);
-
-        System.out.println(order);
-
-        orderController.removeOrder(order);
+    public void cleanAll(){
+        orderController.deleteAll();
+        menuController.deleteAll();
+        employeeController.deleteAll();
+        dishController.deleteAll();
     }
+
+
 }
