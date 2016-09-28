@@ -20,7 +20,7 @@
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
-                    <webXml>src/main/resources/WEB_INF/web.xml</webXml>
+                    <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
                     <warName>restaurant</warName>
                     <outputDirectory>f:\Program Files\apache-tomcat-9.0.0.M10\webapps\</outputDirectory>
                 </configuration>
