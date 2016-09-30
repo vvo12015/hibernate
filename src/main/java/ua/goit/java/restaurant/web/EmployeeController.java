@@ -3,9 +3,12 @@ package ua.goit.java.restaurant.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import ua.goit.java.restaurant.model.Employee;
 import ua.goit.java.restaurant.service.EmployeeService;
 
 @Controller
@@ -27,6 +30,13 @@ public class EmployeeController {
         modelAndView.addObject("employees", employeeService.getAll());
         modelAndView.setViewName("employees");
         return modelAndView;
+    }
+
+    @RequestMapping(value= "/employee", method = RequestMethod.POST)
+    @ResponseBody
+    public Employee employee(@PathVariable Employee employee){
+        employeeService.save(employee);
+        return employee;
     }
 
     @Autowired
