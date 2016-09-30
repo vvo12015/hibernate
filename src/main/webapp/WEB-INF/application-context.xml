@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   <bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource">
+        <property name="driverClass" value="${jdbc.driver.class}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="minPoolSize" value="${jdbc.min.connections}"/>
+        <property name="maxPoolSize" value="${jdbc.max.connections}"/>
+        <property name="acquireIncrement" value="${jdbc.acquire.increment}"/>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:jdbc.properties"/>
+    </bean>
+
+    <bean id="employeeDao" class="ua.goit.java.restaurant.dao.hibernate.HEmployeeDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="tableName" value="Employee"/>
+    </bean>
+
+    <bean id="dishDao" class="ua.goit.java.restaurant.dao.hibernate.HDishDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="tableName" value="Dish"/>
+    </bean>
+
+    <bean id="menuDao" class="ua.goit.java.restaurant.dao.hibernate.HMenuDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="tableName" value="Menu"/>
+    </bean>
+
+    <bean id="stockDao" class="ua.goit.java.restaurant.dao.hibernate.HStockDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="tableName" value="Stock"/>
+    </bean>
+
+    <bean id="ingredientDao" class="ua.goit.java.restaurant.dao.hibernate.HIngredientDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="tableName" value="Ingredient"/>
+    </bean>
+
+    <bean id="orderDao" class="ua.goit.java.restaurant.dao.hibernate.HOrderDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="tableName" value="Orders"/>
+    </bean>
+
+    <bean id="employeeService" class="ua.goit.java.restaurant.service.EmployeeService">
+        <property name="dao" ref="employeeDao"/>
+    </bean>
+
+    <bean id="dishService" class="ua.goit.java.restaurant.service.DishService">
+        <property name="dao" ref="dishDao"/>
+    </bean>
+
+    <bean id="menuService" class="ua.goit.java.restaurant.service.MenuService">
+        <property name="dao" ref="menuDao"/>
+    </bean>
+
+    <bean id="stockService" class="ua.goit.java.restaurant.service.StockService">
+        <property name="dao" ref="stockDao"/>
+    </bean>
+
+    <bean id="ingredientService" class="ua.goit.java.restaurant.service.IngredientService">
+        <property name="dao" ref="ingredientDao"/>
+    </bean>
+
+    <bean id="orderService" class="ua.goit.java.restaurant.service.OrderService">
+        <property name="dao" ref="orderDao"/>
+        <property name="employeeService" ref="employeeService"/>
+        <property name="dishService" ref="dishService"/>
+    </bean>
+</beans>

@@ -203,10 +203,21 @@ public class HibernateTest {
 
     }
 
+    /*@Test
+    public void cleanAll(){
+        orderService.deleteAll();
+        menuService.deleteAll();
+        employeeService.deleteAll();
+        dishService.deleteAll();
+    }*/
 
 
     @Test
     public void init(){
+        orderService.deleteAll();
+        menuService.deleteAll();
+        employeeService.deleteAll();
+        dishService.deleteAll();
         dishService.init();
         employeeService.init();
         orderService.init();
@@ -214,14 +225,5 @@ public class HibernateTest {
         ingredientService.init();
         stockService.init();
     }
-
-    @Test
-    public void cleanAll(){
-        orderService.deleteAll();
-        menuService.deleteAll();
-        employeeService.deleteAll();
-        dishService.deleteAll();
-    }
-
 
 }

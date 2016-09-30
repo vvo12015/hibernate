@@ -10,7 +10,7 @@ import java.util.List;
 abstract class HAbstractDao<T> implements BaseDao<T> {
 
     protected SessionFactory sessionFactory;
-    protected  String tableName;
+    protected String tableName;
 
     public void setTableName(String tableName) {
         this.tableName = tableName;
