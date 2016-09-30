@@ -16,7 +16,7 @@ public class Orders {
     @GenericGenerator(name = "increment", strategy = "increment")
     private long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employee waiter;
 

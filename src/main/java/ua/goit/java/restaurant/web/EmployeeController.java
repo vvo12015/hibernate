@@ -11,6 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 import ua.goit.java.restaurant.model.Employee;
 import ua.goit.java.restaurant.service.EmployeeService;
 
+import java.util.List;
+
 @Controller
 public class EmployeeController {
 
@@ -25,18 +27,17 @@ public class EmployeeController {
     }
 
     @RequestMapping(value= "/employees", method = RequestMethod.GET)
-    public ModelAndView employees(){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("employees", employeeService.getAll());
-        modelAndView.setViewName("employees");
-        return modelAndView;
+    @ResponseBody
+    public List<Employee> employees(){
+        List<Employee> result = employeeService.getAll();
+
+        return result;
     }
 
-    @RequestMapping(value= "/employee", method = RequestMethod.POST)
+    @RequestMapping(value= "/employee/{employeeName}", method = RequestMethod.GET)
     @ResponseBody
-    public Employee employee(@PathVariable Employee employee){
-        employeeService.save(employee);
-        return employee;
+    public Employee employee(@PathVariable String employeeName){
+        return employeeService.getEmployeeByName(employeeName);
     }
 
     @Autowired

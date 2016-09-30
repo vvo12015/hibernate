@@ -65,7 +65,6 @@ public class HibernateTest {
         dishService.delete(dish);
         employeeService.delete(waiter);
         orderService.delete(order);
-
     }
 
 
