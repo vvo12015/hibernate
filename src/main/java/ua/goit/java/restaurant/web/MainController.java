@@ -15,6 +15,11 @@ public class MainController{
         return "index";
     }
 
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String indexPage(Map<String, Object> model){
+        return "index";
+    }
+    
     @RequestMapping(value = "/contacts")
     public String contacts(){
         return "contacts";

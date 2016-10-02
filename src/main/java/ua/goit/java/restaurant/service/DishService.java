@@ -1,8 +1,6 @@
 package ua.goit.java.restaurant.service;
 
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import ua.goit.java.restaurant.dao.DishDao;
 import ua.goit.java.restaurant.model.Dish;
 import ua.goit.java.restaurant.model.DishCategory;
@@ -12,15 +10,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@org.springframework.stereotype.Controller
+
 public class DishService extends AbstractService<Dish, DishDao> {
-
-
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(){
-        return "index";
-    }
-
 
     @Transactional
     public void init(){
