@@ -27,17 +27,17 @@
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li><a href="schema_restaurant">Схема ресторану</a></li>
-              <li><a href="employees">Наші офіціанти</a></li>
-              <li><a href="contacts">Контакти</a></li>
+              <li><a href="menu">Меню</a></li>
+              <li><a href="dish_admin">Страви</a></li>
+              <li><a href="employee_admin">Працівниками</a></li>
+              <li><a href="stock">Склад</a></li>
+              <li><a href="orders">Історія Замовлень</a></li>
               <li class="dropdown">
-                  <a href="index_admin" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Сторінка адміністратора<span class="caret"></span></a>
+                  <a href="index_admin" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Сторінка гостя<span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="menu">Управління меню</a></li>
-                    <li><a href="dish_admin">Управління стравами</a></li>
-                    <li><a href="employee_admin">Управління працівниками</a></li>
-                    <li><a href="stock">Склад</a></li>
-                    <li><a href="orders">Історія замовлень</a></li>
+                    <li><a href="schema_restaurant">Схема ресторану</a></li>
+                    <li><a href="employees">Наші офіціанти</a></li>
+                    <li><a href="contacts">Контакти</a></li>
                   </ul>
               </li>
             </ul>

@@ -1,25 +1,31 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-    <%@include file="header.jsp"%>
+    <%@include file="headerAdmin.jsp"%>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $.ajax({
+                type: 'GET',
+                url: "<c:url value="/listMenu" />",
+                headers : {
+                    Accept : "application/json; charset=utf-8",
+                    "Content-Type" : "application/json; charset=utf-8"
+                },
+                success: function(result){
+                    var listMenu = $.parseJSON(result);
+                    alert(listMenu[0].name);
+                }
+            });
+        });
+     </script>
     <body>
-            <table style="align-items: center">
-                 <tr>
-                    <th>Name</th>
-                    <th>Weight</th>
-                    <th>Price</th>
-                 </tr>
-                 <tr>
-                     <c:forEach  var="dish" items="${dishes}">
-                        <tr>
-                            <td>${dish.name}</td>
-                            <td>${dish.weight}</td>
-                            <td>${dish.price}</td>
-                        </tr>
-                      </c:forEach>
-                 </tr>
-            </table>
-        </body>
+        <fieldset>
+            <legend>Demo1</legend>
+            <input type="button" value="Display Object" id="button1">
+            <br>
+            <div id="result1"></div>
+        </fieldset>
+    </body>
     <%@include file="footer.jsp"%>
 </html>
 
