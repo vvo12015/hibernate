@@ -3,6 +3,9 @@
 
     <%@include file="header.jsp"%>
     <body>
+        <div class="row-fluid">
+          <div class="span12"><p id="nameSite">Ресторан у Валентина</p></div>
+        </div>
         <h1>Hello restaurant!!!!! It is now: ${currentTime}</h1>
         <a href="employees">Show all employees</a><br>
         <a href="dish?id=1">Dish</a><br>

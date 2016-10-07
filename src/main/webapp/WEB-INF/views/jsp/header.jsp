@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <c:set var='projectName' scope="application" value='Ресторан у Валентина'/>
 <html>
     <head>
@@ -8,6 +9,8 @@
         <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
         <link href="<c:url value="/resources/css/bootstrap-theme.css" />" rel="stylesheet">
         <link href="<c:url value="/resources/css/bootstrap-theme.min.css" />" rel="stylesheet">
+        <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
+
 
         <script src="<c:url value="/resources/js/jquery.min.js" />"></script>
         <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>

@@ -12,7 +12,7 @@ public class MainController{
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Map<String, Object> model){
-        return "index";
+        return "myIndex";
     }
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
@@ -34,6 +34,8 @@ public class MainController{
     public String index_admin(){
         return "index_admin";
     }
+
+
 
 
 
