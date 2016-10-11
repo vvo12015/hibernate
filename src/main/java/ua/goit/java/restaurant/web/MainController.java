@@ -12,7 +12,7 @@ public class MainController{
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Map<String, Object> model){
-        return "myIndex";
+        return "index";
     }
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
