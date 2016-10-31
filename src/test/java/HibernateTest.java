@@ -1,14 +1,17 @@
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ua.goit.java.restaurant.Position;
-import ua.goit.java.restaurant.service.*;
 import ua.goit.java.restaurant.model.*;
+import ua.goit.java.restaurant.service.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class HibernateTest {
 
     private static final String WAITER_FOR_ORDER = "waiterForCreate";
@@ -39,7 +42,7 @@ public class HibernateTest {
             applicationContext.getBean("stockService");
 
     @Test
-    public void testOrderLoad(){
+    public void test1OrderLoad(){
 
         Dish dish = new Dish(DishCategory.MAIN, DISH_FOR_ORDER, WEIGHT, PRICE, PHOTO_FOR_TEST);
         dishService.save(dish);
@@ -62,14 +65,14 @@ public class HibernateTest {
 
         Assert.assertEquals("load dish by id", orderTest.getWaiter(), waiter);
 
+        orderService.delete(order);
         dishService.delete(dish);
         employeeService.delete(waiter);
-        orderService.delete(order);
     }
 
 
     @Test
-    public void testDishRemove(){
+    public void test2DishRemove(){
 
         Dish dish = new Dish(DishCategory.MAIN, DISH_NAME, 300F, 15F, PHOTO_FOR_TEST);
 
@@ -79,7 +82,7 @@ public class HibernateTest {
     }
 
     @Test
-    public void testDishLoad(){
+    public void test3DishLoad(){
 
         String dishName = DISH_NAME;
 
@@ -99,7 +102,7 @@ public class HibernateTest {
     }
 
      @Test
-    public void testWaiterLoad(){
+    public void test4WaiterLoad(){
 
          String waiterNameExcepted = WAITER_NAME;
 
@@ -114,13 +117,13 @@ public class HibernateTest {
 
          Assert.assertEquals("load employee by id", employee.getName(), waiterNameExcepted);
 
-         employeeService.delete(employee);
+         employeeService.delete((Employee) employee);
     }
 
 
 
     @Test
-    public void testEmployeeLoad(){
+    public void test5EmployeeLoad(){
 
         String employeeNameExcepted = EMPLOYEE_NAME;
 
@@ -139,7 +142,7 @@ public class HibernateTest {
     }
 
     @Test
-    public void testMenuLoad(){
+    public void test6MenuLoad(){
 
         String menuNameExcepted = MENU_NAME;
 
@@ -151,7 +154,7 @@ public class HibernateTest {
 
         menu = menuService.getById(menuId);
 
-        System.out.println(menu);
+        System.out.println("This is test menu" + menu);
 
         Assert.assertEquals("load menu by id", menu.getName(), menuNameExcepted);
 
@@ -159,7 +162,7 @@ public class HibernateTest {
     }
 
     @Test
-    public void testIngredientLoad(){
+    public void test7IngredientLoad(){
         String ingredientNameExcepted = INGREDIENT_NAME;
 
         Ingredient ingredient = new Ingredient(ingredientNameExcepted, ingredientNameExcepted);
@@ -179,7 +182,13 @@ public class HibernateTest {
     }
 
     @Test
-    public void testStockLoad(){
+    public void test8StockLoad(){
+
+        String ingredientNameExcepted = INGREDIENT_NAME;
+
+        Ingredient ingredient = new Ingredient(ingredientNameExcepted, ingredientNameExcepted);
+
+        ingredientService.save(ingredient);
 
         String stockNameExcepted = INGREDIENT_NAME;
 
@@ -192,7 +201,7 @@ public class HibernateTest {
                 .get(0)
                 .getId();
 
-        Ingredient ingredient = stockService.getById(stockId).getIngredient();
+        ingredient = stockService.getById(stockId).getIngredient();
 
         System.out.println(stock);
 
@@ -200,23 +209,17 @@ public class HibernateTest {
 
         stockService.delete(stock);
 
+        ingredientService.delete(ingredient);
     }
 
-    /*@Test
-    public void cleanAll(){
-        orderService.deleteAll();
-        menuService.deleteAll();
-        employeeService.deleteAll();
-        dishService.deleteAll();
-    }*/
-
-
     @Test
-    public void init(){
+    public void test9Init(){
         orderService.deleteAll();
-        menuService.deleteAll();
         employeeService.deleteAll();
+        menuService.deleteAll();
+        stockService.deleteAll();
         dishService.deleteAll();
+        ingredientService.deleteAll();
         dishService.init();
         employeeService.init();
         orderService.init();

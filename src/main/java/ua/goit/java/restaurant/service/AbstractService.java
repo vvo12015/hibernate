@@ -28,6 +28,7 @@ class AbstractService<T, D extends BaseDao<T>> implements Service<T> {
 
     @Override
     public void delete(T t) {
+        dao.remove(t);
     }
 
     @Override

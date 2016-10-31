@@ -64,6 +64,7 @@
 
     <bean id="ingredientDao" class="ua.goit.java.restaurant.dao.hibernate.HIngredientDao">
         <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="tableName" value="Ingredient"/>
     </bean>
 
     <bean id="ingredientService" class="ua.goit.java.restaurant.service.IngredientService">

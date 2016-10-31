@@ -38,7 +38,7 @@ abstract class HAbstractDao<T> implements BaseDao<T> {
     @Override
     @Transactional
     public void remove(T object) {
-        sessionFactory.getCurrentSession().delete(object);
+        sessionFactory.getCurrentSession().remove(object);
     }
 
     public void setSessionFactory(SessionFactory sessionFactory) {

@@ -3,5 +3,6 @@ package ua.goit.java.restaurant.model;
 public enum DishCategory {
 
     MAIN,
-    CHILDREN
+    FAST_FOOD,
+    DISERTS
 }
