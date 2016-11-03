@@ -9,7 +9,9 @@ import ua.goit.java.restaurant.model.*;
 import ua.goit.java.restaurant.service.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class HibernateTest {
@@ -44,7 +46,13 @@ public class HibernateTest {
     @Test
     public void test1OrderLoad(){
 
-        Dish dish = new Dish(DishCategory.MAIN, DISH_FOR_ORDER, WEIGHT, PRICE, PHOTO_FOR_TEST);
+        Ingredient ingredient = new Ingredient("test", "t");
+        ingredientService.save(ingredient);
+
+        List<Ingredient> listIngredients = new ArrayList<>();
+        listIngredients.add(ingredientService.getIngredientByName("test"));
+
+        Dish dish = new Dish(listIngredients, DishCategory.MAIN, DISH_FOR_ORDER, WEIGHT, PRICE, PHOTO_FOR_TEST);
         dishService.save(dish);
 
         List<Dish> dishes = new ArrayList<>();
@@ -67,6 +75,7 @@ public class HibernateTest {
 
         orderService.delete(order);
         dishService.delete(dish);
+        ingredientService.delete(ingredient);
         employeeService.delete(waiter);
     }
 
@@ -74,7 +83,13 @@ public class HibernateTest {
     @Test
     public void test2DishRemove(){
 
-        Dish dish = new Dish(DishCategory.MAIN, DISH_NAME, 300F, 15F, PHOTO_FOR_TEST);
+        Ingredient ingredient = new Ingredient("test", "t");
+        ingredientService.save(ingredient);
+
+        List<Ingredient> listIngredients = new ArrayList<>();
+        listIngredients.add(ingredientService.getIngredientByName("test"));
+
+        Dish dish = new Dish(listIngredients, DishCategory.MAIN, DISH_FOR_ORDER, WEIGHT, PRICE, PHOTO_FOR_TEST);
 
         dishService.save(dish);
 
@@ -86,7 +101,13 @@ public class HibernateTest {
 
         String dishName = DISH_NAME;
 
-        Dish dish = new Dish(DishCategory.MAIN, dishName, WEIGHT, PRICE, PHOTO_FOR_TEST);
+        Ingredient ingredient = new Ingredient("test", "t");
+        ingredientService.save(ingredient);
+
+        List<Ingredient> listIngredients = new ArrayList<>();
+        listIngredients.add(ingredientService.getIngredientByName("test"));
+
+        Dish dish = new Dish(listIngredients, DishCategory.MAIN, dishName, WEIGHT, PRICE, PHOTO_FOR_TEST);
 
         dishService.save(dish);
 
@@ -220,11 +241,11 @@ public class HibernateTest {
         stockService.deleteAll();
         dishService.deleteAll();
         ingredientService.deleteAll();
+        ingredientService.init();
         dishService.init();
         employeeService.init();
         orderService.init();
         menuService.init();
-        ingredientService.init();
         stockService.init();
     }
 

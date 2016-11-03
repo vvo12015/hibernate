@@ -3,6 +3,7 @@ package ua.goit.java.restaurant.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "dish")
@@ -16,12 +17,30 @@ public class Dish {
     @GenericGenerator(name="increment", strategy = "increment")
     private Long id;
 
-    public Dish(DishCategory category, String name, Float weight, Float price, String photo) {
+    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "ingredient_to_dish",
+            joinColumns = @JoinColumn(name = "dish_id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id")
+    )
+
+    private List<Ingredient> ingredients;
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public Dish(List<Ingredient> ingredients, DishCategory category, String name, Float weight, Float price, String photo) {
+        this.ingredients = ingredients;
         this.category = category;
         this.name = name;
         this.weight = weight;
         this.price = price;
         this.photo = photo;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 
     @Column(name = "category")
@@ -91,10 +110,11 @@ public class Dish {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Dish)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
 
         Dish dish = (Dish) o;
 
+        if (ingredients != null ? !ingredients.equals(dish.ingredients) : dish.ingredients != null) return false;
         if (category != dish.category) return false;
         if (name != null ? !name.equals(dish.name) : dish.name != null) return false;
         if (weight != null ? !weight.equals(dish.weight) : dish.weight != null) return false;
@@ -105,7 +125,8 @@ public class Dish {
 
     @Override
     public int hashCode() {
-        int result = category != null ? category.hashCode() : 0;
+        int result = ingredients != null ? ingredients.hashCode() : 0;
+        result = 31 * result + (category != null ? category.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (weight != null ? weight.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);

@@ -53,6 +53,7 @@
 
     <bean id="dishService" class="ua.goit.java.restaurant.service.DishService">
         <property name="dao" ref="dishDao"/>
+        <property name="ingredientService" ref="ingredientService"/>
     </bean>
 
     <bean id="menuService" class="ua.goit.java.restaurant.service.MenuService">

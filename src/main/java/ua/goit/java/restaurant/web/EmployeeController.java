@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import ua.goit.java.restaurant.Position;
 import ua.goit.java.restaurant.model.Employee;
 import ua.goit.java.restaurant.service.EmployeeService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class EmployeeController {
@@ -32,6 +34,19 @@ public class EmployeeController {
         List<Employee> result = employeeService.getAll();
 
         return result;
+    }
+
+    @RequestMapping(value= "/waiters", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Employee> waiters(){
+        List<Employee> result = employeeService.getAll();
+
+        return result.stream().filter(employee -> employee.getPosition().equals(Position.WAITER)).collect(Collectors.toList());
+    }
+
+    @RequestMapping(value = "/employeeList", method = RequestMethod.GET)
+    public String employeeList(){
+        return "employeeList";
     }
 
     @RequestMapping(value= "/employee/{employeeName}", method = RequestMethod.GET)

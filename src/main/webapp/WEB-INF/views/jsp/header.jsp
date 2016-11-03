@@ -38,7 +38,7 @@
                     </form>
                     <ul class="nav navbar-nav">
                         <li><a href="schema_restaurant">Схема ресторану</a></li>
-                        <li><a href="employees">Наші офіціанти</a></li>
+                        <li><a href="employeeList">Наші офіціанти</a></li>
                         <li><a href="contacts">Контакти</a></li>
                         <li class="dropdown">
                             <a href="index_admin" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Сторінка адміністратора<span class="caret"></span></a>
