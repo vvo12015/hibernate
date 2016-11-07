@@ -5,7 +5,7 @@
     <c:url var="formUrl" value="/menu" />
     <c:forEach var="menu" items="${listMenu}">
         <div class="row">
-            <form id="myForm${menu.name}" action="${formUrl}" class="form-inline" role="form" method="post">
+            <form id="myForm_${menu.name}" action="${formUrl}" class="form-inline" role="form" method="post">
                 <div class="col-md-1"></div>
                 <div class="col-md-3">
                   <div class="form-group">
@@ -16,15 +16,15 @@
                   </div>
                 </div>
                 <div class="col-md-2">
-                    <select multiple name="dishes" class="mySelect" id="dishList${menu.name}">
+                    <select multiple name="dishes" class="mySelect" id="list_${menu.name}">
                         <c:forEach var="dish" items="${menu.dishes}" varStatus="i">
                             <option>${dish.name}</option>
                         </c:forEach>
                     </select>
                 </div>
                 <div class="col-md-2">
-                  <button type="button" class="btn btn-default" id="addDishIn${menu.name}">Додати страву</button>
-                    <select class="mySelect" id="dishListForAddIn${menu.name}">
+                  <button type="button" class="btn btn-default" id="addDishIn_${menu.name}">Додати страву</button>
+                    <select class="mySelect" id="listForAddIn_${menu.name}">
                         <c:forEach var="dish" items="${dishList}">
                             <c:set var="isNotInMenu">true</c:set>
                             <c:forEach var="dishInMenu" items="${menu.dishes}">
@@ -37,11 +37,11 @@
                             </c:if>
                         </c:forEach>
                      </select>
-                  <button type="button" name="delete" class="btn btn-default" id="delDishIn${menu.name}">Видалити страву</button>
+                  <button type="button" name="delete" class="btn btn-default" id="delDishIn_${menu.name}">Видалити страву</button>
                 </div>
                 <div class="col-md-2">
-                  <button type="submit" id="saveMenu${menu.name}" name="save" value="true" class="btn btn-default">Зберегти меню</button>
-                  <button type="submit" name="delete" value="true" class="btn btn-default">Видалити меню</button>
+                  <button type="submit" id="saveMenu_${menu.name}" name="save" value="true" class="btn btn-default">Зберегти меню</button>
+                  <button type="submit" name="deleteMenu_${menu.name}" value="true" class="btn btn-default">Видалити меню</button>
                 </div>
             </form>
         </div>
