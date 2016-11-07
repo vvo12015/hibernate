@@ -19,4 +19,7 @@ public interface Service<T> {
 
     @Transactional
     void delete(T t);
+
+    @Transactional
+    void update(T t);
 }

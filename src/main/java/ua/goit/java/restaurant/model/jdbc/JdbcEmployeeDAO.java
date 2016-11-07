@@ -101,6 +101,11 @@ public class JdbcEmployeeDAO implements EmployeeDAO {
 
     }
 
+    @Override
+    public void update(Employee o) {
+
+    }
+
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }

@@ -13,4 +13,6 @@ public interface BaseDao<T> {
     void remove(T o);
 
     void removeAll();
+
+    void update(T o);
 }

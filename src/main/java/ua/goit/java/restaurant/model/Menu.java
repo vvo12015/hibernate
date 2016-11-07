@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name="menu")
-public class Menu {
+public class Menu{
     public Menu() {
     }
 

@@ -41,6 +41,12 @@ abstract class HAbstractDao<T> implements BaseDao<T> {
         sessionFactory.getCurrentSession().remove(object);
     }
 
+    @Override
+    @Transactional
+    public void update(T object) {
+        sessionFactory.getCurrentSession().update(object);
+    }
+
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }

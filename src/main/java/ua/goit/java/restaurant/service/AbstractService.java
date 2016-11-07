@@ -37,6 +37,11 @@ class AbstractService<T, D extends BaseDao<T>> implements Service<T> {
         dao.removeAll();
     }
 
+    @Override
+    public void update(T t) {
+        dao.update(t);
+    }
+
     public void setDao(D dao) {
         this.dao = dao;
     }
