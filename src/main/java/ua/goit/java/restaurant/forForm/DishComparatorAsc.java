@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 public class DishComparatorAsc implements Comparator<Dish> {
     @Override
-    public int compare(Dish o1, Dish o2) {
-        return o1.getName().compareTo(o2.getName());
+    public int compare(Dish d1, Dish d2) {
+        return d1.getName().compareTo(d2.getName());
     }
 }
