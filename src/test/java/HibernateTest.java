@@ -73,9 +73,9 @@ public class HibernateTest {
 
         Assert.assertEquals("load dish by id", orderTest.getWaiter(), waiter);
 
-        orderService.delete(order);
-        dishService.delete(dish);
         ingredientService.delete(ingredient);
+        dishService.delete(dish);
+        orderService.delete(order);
         employeeService.delete(waiter);
     }
 

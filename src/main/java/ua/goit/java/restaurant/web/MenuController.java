@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import ua.goit.java.restaurant.forForm.DishComparatopAsc;
+import ua.goit.java.restaurant.forForm.DishComparatorAsc;
 import ua.goit.java.restaurant.forForm.MenuComparatorAsc;
 import ua.goit.java.restaurant.forForm.MenuForm;
 import ua.goit.java.restaurant.model.Dish;
@@ -54,7 +54,7 @@ public class MenuController {
         menuList.sort(new MenuComparatorAsc());
         modelAndView.addObject("listMenu", menuList);
         List<Dish> dishList = dishService.getAll();
-        dishList.sort(new DishComparatopAsc());
+        dishList.sort(new DishComparatorAsc());
         modelAndView.addObject("dishList", dishList);
         modelAndView.setViewName("menu");
         return modelAndView;

@@ -1,7 +1,12 @@
 package ua.goit.java.restaurant.service;
 
+import org.springframework.transaction.annotation.Transactional;
 import ua.goit.java.restaurant.dao.hibernate.HIngredientDao;
+import ua.goit.java.restaurant.model.Dish;
 import ua.goit.java.restaurant.model.Ingredient;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class IngredientService extends AbstractService<Ingredient, HIngredientDao> {
 
@@ -25,5 +30,16 @@ public class IngredientService extends AbstractService<Ingredient, HIngredientDa
         dao.save(new Ingredient("Greens", "g"));
         dao.save(new Ingredient("Feta", "g"));
         dao.save(new Ingredient("Olives", "g"));
+    }
+
+
+    @Transactional
+    public List<Ingredient> createIngredients(List<String> ingredients) {
+
+        List<Ingredient> result = ingredients.stream()
+                .map(ingredientName -> dao.findByName(ingredientName))
+                .collect(Collectors.toList());
+
+        return result;
     }
 }

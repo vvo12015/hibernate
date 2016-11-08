@@ -17,7 +17,7 @@ public class Dish {
     @GenericGenerator(name="increment", strategy = "increment")
     private Long id;
 
-    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.DETACH}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "ingredient_to_dish",
             joinColumns = @JoinColumn(name = "dish_id"),

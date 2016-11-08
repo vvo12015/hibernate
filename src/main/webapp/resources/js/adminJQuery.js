@@ -52,7 +52,7 @@ function createConditions(text){
 }
 
 $(document).ready(function(){
-    var buttonName = 'saveMenu';
+    var buttonName = 'save';
     $("[id*='"+ buttonName + "']").click(function(){
         var conditions = createConditions(this.id);
         $(conditions.listInOn).prop("selected", false);
