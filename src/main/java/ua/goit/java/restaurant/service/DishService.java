@@ -74,42 +74,42 @@ public class DishService extends AbstractService<Dish, DishDao> {
         dishPrice = 1.00F;
         ingredients.put(dishName, new ArrayList<>(
                 ingredientService.createIngredients(new ArrayList<>(Arrays.asList("Greens", "Pork")))));
-        dishList.add(new Dish(ingredients.get(dishName), DishCategory.MAIN, dishName, dishWeight, dishPrice, "hotDogPhoto"));
+        dishList.add(new Dish(ingredients.get(dishName), DishCategory.FAST_FOOD, dishName, dishWeight, dishPrice, "hotDogPhoto"));
 
         dishName = "Sandwich";
         dishWeight = 150F;
         dishPrice = 1.00F;
         ingredients.put(dishName, new ArrayList<>(
                 ingredientService.createIngredients(new ArrayList<>(Arrays.asList("Cheese", "Greens", "Pork")))));
-        dishList.add(new Dish(ingredients.get(dishName), DishCategory.MAIN, dishName, dishWeight, dishPrice, "sandwichPhoto"));
+        dishList.add(new Dish(ingredients.get(dishName), DishCategory.FAST_FOOD, dishName, dishWeight, dishPrice, "sandwichPhoto"));
 
         dishName = "Cheese Burger";
         dishWeight = 150F;
         dishPrice = 1.00F;
         ingredients.put(dishName, new ArrayList<>(
                 ingredientService.createIngredients(new ArrayList<>(Arrays.asList("Cheese", "Greens", "Pork")))));
-        dishList.add(new Dish(ingredients.get(dishName), DishCategory.MAIN, dishName, dishWeight, dishPrice, "cheeseBurgerPhotoPhoto"));
+        dishList.add(new Dish(ingredients.get(dishName), DishCategory.FAST_FOOD, dishName, dishWeight, dishPrice, "cheeseBurgerPhotoPhoto"));
 
         dishName = "Chocolate cake";
         dishWeight = 150F;
         dishPrice = 3.00F;
         ingredients.put(dishName, new ArrayList<>(
                 ingredientService.createIngredients(new ArrayList<>(Arrays.asList("Sugar", "Chocolate")))));
-        dishList.add(new Dish(ingredients.get(dishName), DishCategory.MAIN, dishName, dishWeight, dishPrice, "chocolateCakePhoto"));
+        dishList.add(new Dish(ingredients.get(dishName), DishCategory.DISERTS, dishName, dishWeight, dishPrice, "chocolateCakePhoto"));
 
         dishName = "Apple pie";
         dishWeight = 200F;
         dishPrice = 2.00F;
         ingredients.put(dishName, new ArrayList<>(
                 ingredientService.createIngredients(new ArrayList<>(Arrays.asList("Sugar", "Apple")))));
-        dishList.add(new Dish(ingredients.get(dishName), DishCategory.MAIN, dishName, dishWeight, dishPrice, "applePiePhoto"));
+        dishList.add(new Dish(ingredients.get(dishName), DishCategory.DISERTS, dishName, dishWeight, dishPrice, "applePiePhoto"));
 
         dishName = "Cheese cake";
         dishWeight = 150F;
         dishPrice = 1.00F;
         ingredients.put(dishName, new ArrayList<>(
                 ingredientService.createIngredients(new ArrayList<>(Arrays.asList("Sugar", "Cheese")))));
-        dishList.add(new Dish(ingredients.get(dishName), DishCategory.MAIN, dishName, dishWeight, dishPrice, "cheeseCakePhoto"));
+        dishList.add(new Dish(ingredients.get(dishName), DishCategory.DISERTS, dishName, dishWeight, dishPrice, "cheeseCakePhoto"));
 
         dishList.stream().filter(dish -> !dishes.contains(dish)).forEach(dish -> dao.save(dish));
     }

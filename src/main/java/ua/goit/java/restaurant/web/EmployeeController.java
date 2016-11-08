@@ -3,15 +3,15 @@ package ua.goit.java.restaurant.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ua.goit.java.restaurant.Position;
+import ua.goit.java.restaurant.forForm.EmployeeComparatorAsc;
+import ua.goit.java.restaurant.forForm.EmployeeForm;
 import ua.goit.java.restaurant.model.Employee;
 import ua.goit.java.restaurant.service.EmployeeService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,9 +23,33 @@ public class EmployeeController {
     @RequestMapping(value= "/employee_admin", method = RequestMethod.GET)
     public ModelAndView employee_admin(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("employees", employeeService.getAll());
+        List<Employee> employeeList = new ArrayList<>();
+        employeeList = employeeService.getAll();
+        employeeList.sort(new EmployeeComparatorAsc());
+        modelAndView.addObject("employeeList", employeeList);
+        modelAndView.addObject("positionList", Position.values());
         modelAndView.setViewName("employee_admin");
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/employee_admin", method = RequestMethod.POST)
+    public ModelAndView employee(
+            @ModelAttribute("employee") EmployeeForm employeeForm){
+        Employee employee = employeeService.getById(employeeForm.getId());
+        if (employeeForm.getSave() != null) {
+            employee.setName(employeeForm.getName());
+            employee.setSurName(employeeForm.getSurName());
+            employee.setPhoneNumber(employeeForm.getPhoneNumber());
+            employee.setPosition(employeeForm.getPosition());
+            employee.setSalary(employeeForm.getSalary());
+
+            employeeService.update(employee);
+        }
+        if (employeeForm.getDelete() != null){
+            employeeService.delete(employee);
+        }
+
+        return employee_admin();
     }
 
     @RequestMapping(value= "/employees", method = RequestMethod.GET)

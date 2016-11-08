@@ -22,7 +22,7 @@
                 <configuration>
                     <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
                     <warName>restaurant</warName>
-                    <outputDirectory>e:\tomcat9\webapps\</outputDirectory>
+                    <outputDirectory>e:\Program Files\apache-tomcat-9.0.0.M10\webapps\</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>
